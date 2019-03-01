@@ -19,7 +19,7 @@
 
 
 
-###Redis 基础命令
+### Redis 基础命令
 #### STRING
 
 <div align="center"> <img src="pics/6019b2db-bc3e-4408-b6d8-96025f4481d6.png" width="400"/> </div><br>
@@ -162,7 +162,7 @@ OK
 
 ### 文章点赞
 
-####数据模型
+#### 数据模型
 两个有序集合：
 
 * time:，有序集合，存储的是根据时间排序的文章
