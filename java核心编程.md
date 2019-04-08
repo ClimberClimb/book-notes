@@ -177,5 +177,100 @@
 * all java objects live on the heap, when an object contains another object variable, it contains just a pointer to yet another heap object
 * the Date class represents a point in time the LocalDate class expresses days in the familiar calendar notation
 * mutator method, accessor methods(without modifying objects)
+* a constructor has the same name as the class, a class can have more than one constructor
+
+* A constructor can only be called in conjunction with the new operator, you cannot apply a constructor to an existing object to reset the instance fields
+
+* **all Java objects are constructed on the heap**
+
+* the keyword this refers to the implicit parameter
+
+* Be careful not to write accessor methods that return references to mutable objects
+
+* ```java
+  // unlike LocalDate class, which has no mutator methods, the Date class has a mutator method, setTime
+  class Employee
+  {
+    private Date hireDay;
+    public Date getHireDayz()
+    {
+  		 return hireDay; // bad
+    }
+  }
+  ```
+
+* if you need to return a reference to a mutable object, you should clone it first
+
+* a method can access the private data of all objects of its calss
+
+* if can define an instance field as final, such a field must be initialized when the object is constructed, and the field may not be modified again. 
+
+*  **for mutable classes, the final modifer can be confusing**, it means that the object reference stored in the variable will never again be changed to another object, but the object can be mutated
+
+* **if you define a field as static, there is only one such field per class, it belongs to the class, not to any individual object**
+
+* Static constant  **public static final double PI**, if there is no static, you would need an object to access PI.
+
+* **static methods are methods that do not operate on objects**
+
+  * when a method does not need to access the object state, because all parameters are supplied
+  * when a method only needs to access static fields of the class
+  * use static factory methods that construct objects, so you can give names to constructors and  you can vary the type of the constructed object.
+
+* **the main method does not operate on any object, so the main method is static**
+
+* the Java always uses call by value,  the method gets a copy of all parameter values, and **object reference are passed by value**
+
+* Overloading occurs if serveral methods have the same name but different parameters, the compiler must sort out which method to call. 
+
+* you must always explicitly initialize local variables in a method, but in a class, if you do not initialize a field, it is automatically initialized to a default
+
+* you can simply assign a value to any field in the class definition
+
+* ```java
+  private String name = ""
+  ```
+
+  This assignment is carried out before the constructor executes
+
+* if the first statement of a constructor has the form this(…), it just calls. another constructor of the class
+* initialize a data field 
+  * setting a value in a constructor
+  * assigning a value in the declaration
+  * Initializing in the object initialization block {...}
+
+* a form of the import statement permits the importing of static methods and fields **import static java.lang.system.***
+
+* to place classes inside a package, you must put the name of the package at the top of your source sill, before the code that defines the classes in the package
+
+* you can compile the file even if it is not contained in a subdirectory, but the JVM will not find the class
+
+* if you do not specify either public or private, the feature can be accessed by all methods in the same package
+
+* if you seal a package, no further classes can be added to it
+
+* a JAR file contains multiple class files and subdirectories in a compressed format, saving space and improving performance
+
+* the javac compiler always looks for files in the current directory, but the JVM will not if the current directory is not on the class path
+
+* you can import nonpublic classes from the current package
+
+* set the class path, and you can also use the CLASSPATH environment variable
+
+* ```
+  java -classpath .;; MyProg
+  ```
+
+* you can use javadoc to generate HTML documentation from your source files, if you add comments that start with the special delimiter /** to your source code, you can easiy produce prefessional-looking documentation
+
+* to generate the package comments
+
+  * you can supply an HTML file named package.html
+  * supply a Java file name package-info.java, with comments delimited with /** */ followed by a package statement
+
+  
+
+## Chapter five Inheritance
+
 * 
 
