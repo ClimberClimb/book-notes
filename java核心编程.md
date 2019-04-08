@@ -272,5 +272,9 @@
 
 ## Chapter five Inheritance
 
+* All inheritance in Java is public in inheritance
+* you can use the special keyword super to call the children class method
+* the constructor parameters are either passed to another constructor of the same class this or a constructor of the superclass
+* **the fact that an object variable can refer to multiple actual types is called polymorphism**, and select the appropricatre method at runtime is called dynami binding 
 * 
 
