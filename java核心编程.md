@@ -403,3 +403,18 @@
 * **do not use protected fields**
 
 * **use polymorphism not type information**
+
+## Chapter 6 Interfaces
+
+* interfaces is a way of describing what classes should without specifying how they should do it
+* an interface is not a class but a set of requirements for the classes that want to conform to the interface
+* any class that implements the Comparable interface is requird to have compareTo method
+* all methods of an interface are automatically public, fields are always public static final
+* interfaces can also define constants, never have instance fields
+* the reason for interfaces is that the Java programming language is strongly typed
+* if there is a common algorithm for comparing subclass objects, simply provide a single compareTo method in the superclass and declare it as final
+* sgn(x.compareTo(y)) == -sgn(y.compareTo(x)) 
+* even though you cannot construct interface object, you can still declare interface variables
+* classes can implement multiple interfaces
+* 
+
