@@ -1,5 +1,3 @@
-
-
 ## 第一章
 
 * MySQL最重要，最与众不同的特性是它的存储引擎架构，这种架构的设计将查询处理以及其他系统任务和数据的存储/提取相分离
@@ -809,4 +807,120 @@ create view oceania as select * from test_order where user_id = 3 with check opt
     ```
 
 * 不要使用LOAD DATA FROM MASTER 或者 LOAD TABLE FROM MASTER这些命令过时，缓慢，并且非常危险，只适用于MyISAM
-* 
+* 基于语句的复制
+  * 更新必须时串行的
+  * 存储过程和触发器在使用时可能存在问题
+  * 二进制日志里面的事件更加紧凑
+
+* MySQL能够在这两种复制模式动态切换，默认情况下使用的是基于语句的复制方式，但是如果发现无法正确地复制，就切换到基于行的复制模式，还可以通过binlog_format控制二进制日志格式
+* 基于行的复制
+  * 能处理的场景比较多，减少锁的使用，能根据slave_exec_mode来配置错误的处理
+  * 但是无法判断执行了哪些SQL
+
+* log_slave_updates 选项可以让备库变成其他服务器的主库存
+* binlog_db_db和binlog_ignore_db不仅可能会破坏复制，还可能导致从某一个时间点的备份进行数据恢复时失败
+* The [`sql_log_bin`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_sql_log_bin) variable controls whether logging to the binary log is enabled for the current sessio
+* 如果需要多个备库，一个好办法 就是从主库移除负载并且分发主库，为了避免在分发主库上做实际的查询，可以讲它的表改为blackhole存储引擎，在某些情况下可以通过设置slave_compressed_protocol来节约一些主库带宽
+
+* 查看复制, 也可以使用pt-heartbeat去检测复制延迟
+
+* ```
+  SHOW MASTER STATUS;
+  SHOW MASTER LOGS;
+  SHOW BINLOG EVENTS IN 'mysql-bin.000223' FROM 13634\G
+  ```
+
+* 确认主备库上的数据是否一致，可以使用pt-table-checksum， 然后通过pt-table-sync去同步两者之间的数据
+
+  
+
+## 第十一章 可扩展MySQL
+
+* 扩展的偏差因素
+  * 无法并发执行的一部分工作
+  * 内部节点之间后者进程间的通信
+* 构建高扩展性系统的重要原则: 再系统尽量避免串行化和交互
+* 向外扩展
+  * 按功能拆分
+  * 分片: 如何查找和获取数据，确定分区键一个比较好的方法是用实体-关系图或者一个等效的能显示所有实体及其关系的工具来展示数据模型
+  * 动态分配可以让分片策略根据需要变得很复杂，固定分配则没有 那么多选择
+
+* 使用auto_increment_increment和auto_increment_offset去配置多服务器的自增
+* Sphinx是一个全文检索引擎，虽然不是分片数据存储和检索系统，但对于一些跨分片数据存储的查询依然有用
+* 负载均衡: Wackamole, DNS, LVS, 硬件负载均衡（HAProxy），TCP代理（pen），MySQL proxy，以及在应用中的负载均衡，大多是使用HAProxy
+* 转移ip：首先分配一个固定ip地址，然后为每一个逻辑上的服务使用一个虚拟ip地址，它们能够很方便地在服务器间转移
+
+## 第十二章 高可用性
+
+* 很难去回顾我们解决的问题当时所处的状况，也很难理解真正的原因，因为原因通常是多方面的。因此，尽管事后反思可能是有用的，但也应该对结论有所保留
+* 增加故障之间的正常运行时间，或者减少从故障中恢复的时间
+* 谨慎使用自动化故障转移，可能不会按照正确的方式工作，破坏数据
+
+## 第十三章 云端MySQL
+
+* 云是一个部署平台，而不是一种架构
+* 选择一个可扩展的平台，并不能自动使应用变得可扩展
+
+##  第十四章 应用层优化
+
+* New Relic是一个很好的工具，他可以剖析Web应用的前端，应用以及后端
+* 总是连接到一个特定的数据库并且使用完整的表名也许是更好的办法
+* 连接池有大量SQL执行的时候效果不错，但是也可能有一些副作用，比如说应用的事务，临时表，连接相关的配置项，以及用户自定义变量之间的相互干扰等
+* 当遇到连接池完全占满时，应该将连接请求进行排队而不是扩展连接池
+
+## 第十五章 备份与恢复
+
+* 规划备份和恢复策略时，要考虑恢复点目标和恢复时间目标
+
+* 复制不是备份，使用RAID阵列也不是备份，如果意外地在生产库上执行了DROP DATABASE，不能帮助你恢复数据
+
+* 二进制日志备份需要保存足够长的时间，以便能从最近的逻辑备份进行恢复
+
+* 将二进制日志保存在一个独立的SAN卷或者使用DRBD磁盘复制
+
+* 可以用ionice和ince来提高复制或压缩操作的优先级
+
+* 像Percona XtraBackup和MySQL Enterprise Backup这样的工具都有限流选项
+
+* 如果使用逻辑备份，测试恢复需要的时间很重要
+
+* 使用mysqlcheck可以对所有的表执行CHECK TABLES
+
+* 备份: 二进制日志，事务日志，代码，复制配置，服务器配置，文件系统文件
+
+* 当从备库备份时，应该保存所有关于复制进程的信息
+
+* mysqlbinlog又一个非常方便的特性，可以在服务器上实时对二进制日志做镜像
+
+* 分隔文件备份, 速度比mysqldump快
+
+* ````mysql
+  SELECT * INTO OUTFILE '/TMP/T1.TXT' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM test.t1;
+  
+  LOAD DATA INFILE '/TMP/T1.TXT' INTO TABLE test.t1 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n';
+  ````
+
+* 创建快找时减少必须持有锁的时间的一个简单的方法，释放锁后，必须复制文件到备份中
+
+* 创建LVM快照，从快照中创建备份
+
+  ```bash
+  lvcreate --size 16G --snapshot --name backup_mysal /dev/vg/mysql
+  ```
+
+* 在恢复过程中，保证MySQL除了恢复进程外不接受其他访问，可以使用—skip-networking 和 —socket=/tmp/mysql_recover.sock
+
+* mysqlbinlog 恢复数据
+
+  ```bash
+  mysqlbinlog --database=sakila /var/log/mysql/mysql-bin.000215 | grep -B3 -i 'dtop table sakila.payment'
+  mysqlbinlog --database=sakila /var/log/mysql/mysql-bin.000215 --stop-position=352 | mysql -uroot -p
+  mysqlbinlog --database=sakila /var/log/mysql/mysql-bin.000215 --start-position=429 | mysql -uroot -p
+  ```
+
+* innodb_force_recovery参数控制着InnoDb在启动和常规操作时要做哪一种类型的操作
+
+## 第十六章 用户工具
+
+* innotop
+
