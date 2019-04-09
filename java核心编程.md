@@ -273,8 +273,133 @@
 ## Chapter five Inheritance
 
 * All inheritance in Java is public in inheritance
-* you can use the special keyword super to call the children class method
-* the constructor parameters are either passed to another constructor of the same class this or a constructor of the superclass
-* **the fact that an object variable can refer to multiple actual types is called polymorphism**, and select the appropricatre method at runtime is called dynami binding 
-* 
 
+* you can use the special keyword super to call the children class method
+
+* the constructor parameters are either passed to another constructor of the same class this or a constructor of the superclass
+
+* **the fact that an object variable can refer to multiple actual types is called polymorphism**, and select the appropricatre method at runtime is called dynami binding 
+
+* If the superclass method is public, the subclass method is public, the subclass method must also be declared public
+
+* occasionally, you want to prevent someone from forming a subclass from one of your classes. classes that cannot be extended are called final classes
+
+* all methods in a final class are automatically final
+
+* you can also make a specific method in a class final, then no subclass can override that method
+
+* if you assign a superclass reference to a subclass variable you are promising more then you must use a cast so that your promise can be checked at runtime
+
+* it is good programming practice to find out whether a cast will succeed before attempting it, simply use the **instanceof** operator
+
+  ```java
+  staff[i] instanceof Manager
+  ```
+
+* Abstract classes cannot be instantiated,  no objects of that class can be created. you can still create object variables of an abstract class but such a variable must refer to an object of a non abstract subclass
+
+* **protected fields and protected methods**, the subclases can be trusted to use the method correctly, but other classes cannot 
+
+* ```
+  private: Visiable to the class only 
+  pubic: Visiable to the world
+  protected: Visiable to the package and all subclasses
+  default: Visiable to the package
+  ```
+
+* every class in Java extendes Object, only the values of primitive types are not objects
+
+* the call Objects.equals(a, b) return true if both arguments are null, false if only one is null, and calls a.equals(b) otherwise
+
+* equals
+
+  * if subclasses can have their own notion of equality, then the symmetry requirement forces you to use the getClass test
+  * if the notion of equality is fixed in the superclass, then you can use the instance test and allow objects of different subclasses to be equal to one another
+
+* use **@Override** to override the superclass method
+
+* a hashcode is an integer that is derived from an object, String class hashcode method
+
+* ```java
+  int hash = 0;
+  for (int i = 0; i < length(); i++)
+      hash = 31 * hash + charAt(i);
+  ```
+
+* **the hashCode method is defined in the Object class, that hash code is derived from the object's memory address**
+
+* if you refine the equals method, you will also need to redefine the hashCode method for objects that users might insert into a hash table
+
+  ```java
+  public int hashCode()
+  {
+    return Objects.hash(name, salary, hireDay);
+  }
+  ```
+
+* toString method is in object, the array type can call the Array.toString, or Array.deepToString for multidimensional arrays
+
+* ArrayList is a generic class with a type parameter, to specify the type of the element objects that the array list holds, you append a class name enclosed in angle brackets such as 
+
+* ```
+  ArrayList<Employee> = new ArraryList<>(); // diamond syntax
+  ```
+
+* once you are reasonably sure that the array list is at its permanant size, you can call the trimToSize method, this method adjusts the size of the memory block to use exactly as much storage space as is required
+
+* You can suppress warnings using :  @SuppressWarning("unchecked")
+
+* Typed arraylist vs raw arraylist
+
+* All primitive types have class counterparts are called wrappers, and you shold call the equals method when comparing wrapper objects
+
+* List.add(3) == list.add(Integer.valueOf(3)).  is called **autoboxing**
+
+* Integer objects are also immutable, the information contained inside the wrapper cannot change
+
+* printf(String fmt. Object … args) the object … parameter types is the same as Object[]
+
+* define enum 
+
+* ```java
+  enum Size
+  {
+     SMALL("S"), MEDIUM("M"), LARGE("L"), EXTRA_LARGE("XL");
+  
+     private Size(String abbreviation) { this.abbreviation = abbreviation; }
+     public String getAbbreviation() { return abbreviation; }
+  
+     private String abbreviation;
+  }
+  ```
+
+* a program that can analyze th capabilities of classes is called reflective
+
+* **the getClass method in the Object class return an instance of Class type**
+
+* int.class is nevertheless the object of type Class
+
+* get the class from string, if the loading class in main is too slow, you can use this to loading the class
+
+  ```java
+  String className = "java.util.Random"; 
+  Class cl = Class.forName(className);
+  ```
+
+* the virtual machine manages a unique Class object for each type, so you can use  == operator to compare class objects
+
+* Class.forName(s).newInstance() to get the instance using empty constructor
+
+* the ObjectAnalyzer keeps track of objects that were already visited,
+
+* ```java
+  new ObjectAnalyzer().toString(squares);
+  ```
+
+* The Array class in the jave.lang.reflect package allows you to create arrays dynamically
+
+* the Method class has an invokemethod that lets you call the method that is wrapped in the current Method object
+
+* **do not use protected fields**
+
+* **use polymorphism not type information**
