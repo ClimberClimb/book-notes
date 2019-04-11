@@ -468,5 +468,58 @@
 
 * Arrays.sort(people, Comparator.comparint(Person::getName))
 
+* an object that comes from an inner class has an implicit reference to the outer class object that instantiated it, static inner classes do not have this added pointer
+
+* an inner class cannot have static methods
+
+* any static fields declared in an inner class must be final
+
+* Gets class of static method: new Object(){}.getClass().getEnclosingClass()
+
+* use a static inner class whenever the inner class does not need to access an outer class object
+
+
+
+## chapter 7 Exceptions
+
+* an exception object is always an instance of a class derived from Throwable
+* you declare that your method may throw an exception with an exception specification in the method header
+* if the superclass method throws no checked exception at all,, neither can the subclass
+* you are not allowed to add more throws specifiers to a subclass method Thant are present in the superclass method
+* e.getMessage() to get the detailed message of the exception
+* e.getClass().getName() to get the actual type of the exception object
+* using se.initCause(e) to set the initial cause of the exception
+* we strongly suggest that you decouple try/catch and try/finally blocks, this makes your code far less confusing
+* use th try-with-resources statement whenever you need to close a resource
+* throw early, catch late
+* you can use **ea da** to enable or disable assertions
+
+* it is also possible to change logging levels in a running program by using the console program
+* you ca use jmap utility to get a heap dump that shows you every object on th heap
+* you can launch the Java Virtual Machine with the -Xprof flag, it runs a rudimentary profiler that keeps track of the methods in your code that were executed most often
+* if you launch the JVM with the -Xprof flag, it runs rudimentary profiler that keeps track of the methods in your code 
+
+
+
+## chapter 8 Generic Programming
+
+* T extends Comparable & Serializable, T is a subtype of Comparable
+
+* Bridge methods ar synthesized to preserve polymorphism
+
+* There are no generics in the virtual machine, only ordinary classes ad methods
+
+* Bridge methods are synthesized to preserve polymorphism
+
+* type parameters cannot be instantiated with primitive types
+
+* Objects in the JVM always have a specific nongeneric type
+
+* You cannot instantiate arrays of parameterized types, such as 
+
+  Pair<String>[] table = new Pair<String>[10];
+
+* static fields and methods with type variables are simply outlawed
+* a class or type variable may not at the same time be a subtype of two interface types which are different parameterization of the same interface
 * 
 
