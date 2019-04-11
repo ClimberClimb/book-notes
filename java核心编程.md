@@ -521,5 +521,11 @@
 
 * static fields and methods with type variables are simply outlawed
 * a class or type variable may not at the same time be a subtype of two interface types which are different parameterization of the same interface
-* 
 
+* there is no inheritance relationship between pair classes
+* arrays come with special protection, if you try to store a lowly employee into employeeBuddies[0], the VM throws an ArrayStoreException
+* Pair<Employee> is a subtype of the raw type Pair, this conversion is necessary for interfacing with legacy code
+* wildcard type:  Pair<? extends Employee>, Pair(raw), Pair<? extends Employee,Pair<Manager>, Pair<Employee>
+* wildcards with supertype bounds let you write to a generic object, while wildcards with subtype bounds let you read form a generic object
+* String.class is actually an object of the class Class<String>
+* 
