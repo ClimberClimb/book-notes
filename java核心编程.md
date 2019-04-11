@@ -407,14 +407,66 @@
 ## Chapter 6 Interfaces
 
 * interfaces is a way of describing what classes should without specifying how they should do it
+
 * an interface is not a class but a set of requirements for the classes that want to conform to the interface
+
 * any class that implements the Comparable interface is requird to have compareTo method
+
 * all methods of an interface are automatically public, fields are always public static final
+
 * interfaces can also define constants, never have instance fields
+
 * the reason for interfaces is that the Java programming language is strongly typed
+
 * if there is a common algorithm for comparing subclass objects, simply provide a single compareTo method in the superclass and declare it as final
+
 * sgn(x.compareTo(y)) == -sgn(y.compareTo(x)) 
+
 * even though you cannot construct interface object, you can still declare interface variables
+
 * classes can implement multiple interfaces
+
+* interfaces afford most of the benefits of multiple inheritance while avoiding the complexities and inefficiencies
+
+* you are allowed to add static methods to interfaces, so no reason to provide a separate companion class for utility methods
+
+* you can supply a default implementation for any interface method, you must tag such a method with the default modifier
+
+* an important use for default methods is interface evolution
+
+* superclass > interface default method, the class wins
+
+* callback pattern, you can pass an object of a class that implements the specific interface
+
+* a comparator an instance of a class that implements the Comparator interface
+
+* ```java
+  class LengthComparator implements Comparator<String>
+  {
+      public int compare(String first, String second)
+      {
+          return first.length() - second.length();
+      }
+  }
+  ```
+
+* the Cloneable interface is a tagging interface, which is to allow instance of Cloneable
+
+* you can supply a lambda expression whenever an object of an interface with a single abstract method is expected, such an interface is called a functional interface
+
+* a particularyly usefule interface in the jave.uti.function package is Predicate
+
+* method reference, object::instanceMethod, Class::staticMethod, Class::instanceMethod
+
+* constructor reference, int[]::new, x -> new int[x]
+
+* In Java, lambda expressions are closures
+
+* when you use the this keyword in a lambda expression, you refer to the this parameter of the method that creates the lambda
+
+* the most important functional interface that are provided in the Java API, we can use the Runnable interface
+
+* Arrays.sort(people, Comparator.comparint(Person::getName))
+
 * 
 
