@@ -1,5 +1,3 @@
-
-
 # Java核心编程
 
 ## Chapter One Intro
@@ -528,4 +526,115 @@
 * wildcard type:  Pair<? extends Employee>, Pair(raw), Pair<? extends Employee,Pair<Manager>, Pair<Employee>
 * wildcards with supertype bounds let you write to a generic object, while wildcards with subtype bounds let you read form a generic object
 * String.class is actually an object of the class Class<String>
+
+
+
+## Chapter 9 Collections
+
+* the two commono implementations of queue, one use a circular array and one uses a linked list
+
+* For Java SE 8, you can call the forEachRemainning method with a lambda expression that consumers an element
+
+* the Collections interface
+
+* <div align="center"> <img src="pics/WX20190412-095852@2x.png" width="400"/> </div><br>
+
+* the interface has no methods but you can use it to test whether a particular collection supports efficient random access
+* this position dependent add method is the responsibity of an iterator
+* unlike the add method, which depends only on the iterator position, the remove method depends on the iterator state
+* the colletions keeps track of the number of mutating operations, eaach iterator keeps a separate count of the number of mutating operations that it was responsible for
+* all methods of the Vector class are synchronized it is safe to access a Vector object from two threads
+* View: implements the Set interface and whose methods manipulate othe original map, such a collection is called a view
+
+
+
+## chapter 13
+
+* use the jar tool to make JAR files
+
+* ````
+  jar cvf JARFileName File1 File2...
+  ````
+
+* in addition to class files, images, and other resources, each JAR file contains a manifest file that describes special features of the archive
+
+* to edit the manifest 
+
+* ```
+  jar cfm JARFileName ManifestFileName
+  ```
+
+* you can specify the main class of your progarm in the manifest
+
+* start the progam
+
+* ```
+  java -jar MyProgram.jar
+  ```
+
+* resources
+
+* ```java
+  URL url = ResourceTest.class.getResource("test.gif");
+  Image img = new ImageIcon(url).getImage();
+  ```
+
+* sealing
+
+* ```
+  Name: com/mycompany/util/
+  Sealed: true
+  ```
+
+* the program remembers the frame position, size and tiles in properties
+
+* if you store complex configuration information, you should use the Preferences class instead
+
+* service loader
+
+* ```java
+  public static ServiceLoader<Cipher> cipherLoader = ServiceLoader.load(Cipher.class);
+  ```
+
+## Chapter 14 Concurrency
+
+* each process has a complete set of its own variables, threads share the same data, communication between threads more efficient and easier to program than interprocess communication, threads are more lightweight than processes
+
+* the **interrupted** method clears the interrupted status of the thread
+
+* daemon threads are sometimes mistakenly, and it should never access a persistent resource such as a file or database since it can terminate at any time
+
+* there are now better features for operating on collections of threads, we recommend that you do not use thread in your program
+
+* You can actually peek at the virtual machine bytecodes that execute each statement in our class, 
+
+  ```
+  javap -c -v Bank
+  ```
+
+* private Lock bankLock = new ReentrantLock(); // ReentrantLock implements the Lock interface
+
+* a lock object can have one or more associated condition objects, you obtain a condition object with the newCondition method
+
+* a thread can only call await, signalAll, or signal on a condition if it owns the lock of the condition
+
+* if a method is declared with the synchronized keyword, the object's lock protects the entire method
+
+* ```java
+  public synchronized void method()
+  ```
+
+* intrinsic lock and conditions have some limitations:
+
+  * You cannot interrupt a thread that is trying to acquire lock
+  * You cannot sepcify a timeout when trying to acquire a lock
+  * having a single condition per lock can be inefficient
+
+* block,  synchronized(obj) { critical section }  
+* the volatile keyword offers a lock-free mechanism for synchronizing access to an instance field
+* the AtomicInteger class has methods incrementAndGet and decrementAgdGet that atomically increment or decrement an integer
+* if you have a very large number of threads: using LongAdder and LongAccumulator
+* what is one to do with a map that has over two billion entries, Java SE 8 introduces a mappingCouunt method that returns the size as a long
+* the futureTask wrapper is a convenient mechanism for turning a Callable into both a Future and a Runnable
 * 
+
