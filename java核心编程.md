@@ -636,5 +636,3 @@
 * if you have a very large number of threads: using LongAdder and LongAccumulator
 * what is one to do with a map that has over two billion entries, Java SE 8 introduces a mappingCouunt method that returns the size as a long
 * the futureTask wrapper is a convenient mechanism for turning a Callable into both a Future and a Runnable
-* 
-
