@@ -1,6 +1,12 @@
 # The elements of Computing Systems
 
+[projects of the book](https://github.com/ClimberClimb/nand2tetris)
+
 ## Preface
+
+
+
+
 
 * hardware and software systems are tightly interrelated through a hidden web of abstractions, interfaces, and contract-based implementations
 
@@ -21,9 +27,14 @@
 * <div align="center"> <img src="pics/boolean_functions.png" width="600"/> </div><br> 
 
 * logic design is the art of interconnecting gates in order to implement more complex functionality, leading to the notion of composite gates
+
 * a multiplexor is a three-input gate that uses one of the inputs called selection bit to select and output one of the other two inputs, called data bits
+
 * a demultiplexor performs the opposite function of a multiplexor, it takes a single input and channels it to one of two possible outputs according to a selector bit 
+
 * computer hardware is typically designed to operate on multi-bit arrays called buses
+
+* every boolean function can be expressed using at least one Boolean expression called the canonical representations
 
 ## Boolean Arithmetic
 
@@ -149,3 +160,4 @@
 * IO is done by encapsulating the details of interfacing the device and by providing convenient access to its basic functionality, using a set of O/S routines collectively known as the device driver
 
   
+
