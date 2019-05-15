@@ -47,3 +47,16 @@
 
 ## Chapter two Representing and manipulating information
 
+* The electronic circuitry for storing and performing computations on two-valued signals is very simple
+* Floating-point encodings are a base-2 version of scientific notation for representing real numbers
+* the C standards are designed to allow a wide range of implementations, the java standard is quite specific on the formats and encodings of Java
+* C standard: --std=c11, --std=c99, --ansi, --std=c89
+* every computer has a word size, indicating the nominal size of pointer data, since a virtual address is encoded by such a word, the most important system parameter determined by the word size is the maximum size of the virtual address space
+*  compile you can use -m32 to generate program for 32 or 64 bit machine, or -m64 just for 64-bit machine
+* ISO C99 introduce a class of data types where the data sizes are fixed regardless of compiler and machine settings
+* char type, most compilers treat these as signed data, the C standard does not guarantee this, it is best to use signed char
+* a multi-byte object is stored as a contiguous sequence of bytes, with the address of the object given by the smallest address of the bytes used
+* The least significant byte comes first, is referred to as little-endian
+* byte ordering becomes an issue, when binary data are communicated over a network between different machines
+* size_t is the preferred data type for expressing the sizes of the data structures
+* 
