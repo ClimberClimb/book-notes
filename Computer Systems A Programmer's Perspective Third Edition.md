@@ -59,4 +59,8 @@
 * The least significant byte comes first, is referred to as little-endian
 * byte ordering becomes an issue, when binary data are communicated over a network between different machines
 * size_t is the preferred data type for expressing the sizes of the data structures
+* we can dereference a pointer with array notation, we can reference array elements with pointer notation.
+* the ASCII code for decimal digit x happens to be 0x3x, text data are more platform independent than binary data
+* the letters 'a' through 'z' have ascii codes 0x61 through 0x7A
+* the strlen does not count the terminating null character in C
 * 
