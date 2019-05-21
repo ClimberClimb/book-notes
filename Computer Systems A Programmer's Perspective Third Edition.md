@@ -69,7 +69,8 @@
 * for unsigned data, on the other hand, right shifts must be logical
 * Java supports only signed numbers
 * . Consider the comparison -1 < 0U. Since the second operand is unsigned, the first one is implicitly cast to unsigned, and hence the expression is equivalent to the comparison 4294967295U < 0U
-* 
->>>>
-
+* **#define INT_MIN (-INT_MAX - 1)**, the asymmetry of the two's complement representation and the conversion rules of C forces us to write in this unusual way
+* sign extension preserves the value of a two's complement number
+* when converting from short to unsigned, the program first changes the size and then the type
+*  the addition sum overflow, if and only if s < x, or s < y
 * 
