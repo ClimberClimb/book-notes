@@ -59,4 +59,10 @@
 * The least significant byte comes first, is referred to as little-endian
 * byte ordering becomes an issue, when binary data are communicated over a network between different machines
 * size_t is the preferred data type for expressing the sizes of the data structures
+* Binary code is seldom portable across different combinations of machine and operating system
+* (a ^ b) ^ a = b , exclusive or
+* almost all compiler combinations use arithmetic right shifts for signed data
+* for unsigned data, on the other hand, right shifts must be logical
+* Java supports only signed numbers
+* . Consider the comparison -1 < 0U. Since the second operand is unsigned, the first one is implicitly cast to unsigned, and hence the expression is equivalent to the comparison 4294967295U < 0U
 * 
