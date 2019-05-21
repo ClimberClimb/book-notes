@@ -52,7 +52,7 @@
 * the C standards are designed to allow a wide range of implementations, the java standard is quite specific on the formats and encodings of Java
 * C standard: --std=c11, --std=c99, --ansi, --std=c89
 * every computer has a word size, indicating the nominal size of pointer data, since a virtual address is encoded by such a word, the most important system parameter determined by the word size is the maximum size of the virtual address space
-*  compile you can use -m32 to generate program for 32 or 64 bit machine, or -m64 just for 64-bit machine
+* compile you can use -m32 to generate program for 32 or 64 bit machine, or -m64 just for 64-bit machine
 * ISO C99 introduce a class of data types where the data sizes are fixed regardless of compiler and machine settings
 * char type, most compilers treat these as signed data, the C standard does not guarantee this, it is best to use signed char
 * a multi-byte object is stored as a contiguous sequence of bytes, with the address of the object given by the smallest address of the bytes used
@@ -63,4 +63,13 @@
 * the ASCII code for decimal digit x happens to be 0x3x, text data are more platform independent than binary data
 * the letters 'a' through 'z' have ascii codes 0x61 through 0x7A
 * the strlen does not count the terminating null character in C
+* Binary code is seldom portable across different combinations of machine and operating system
+* (a ^ b) ^ a = b , exclusive or
+* almost all compiler combinations use arithmetic right shifts for signed data
+* for unsigned data, on the other hand, right shifts must be logical
+* Java supports only signed numbers
+* . Consider the comparison -1 < 0U. Since the second operand is unsigned, the first one is implicitly cast to unsigned, and hence the expression is equivalent to the comparison 4294967295U < 0U
+* 
+>>>>
+
 * 
