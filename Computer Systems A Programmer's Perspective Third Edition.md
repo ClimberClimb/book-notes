@@ -48,29 +48,80 @@
 ## Chapter two Representing and manipulating information
 
 * The electronic circuitry for storing and performing computations on two-valued signals is very simple
+
 * Floating-point encodings are a base-2 version of scientific notation for representing real numbers
+
 * the C standards are designed to allow a wide range of implementations, the java standard is quite specific on the formats and encodings of Java
+
 * C standard: --std=c11, --std=c99, --ansi, --std=c89
+
 * every computer has a word size, indicating the nominal size of pointer data, since a virtual address is encoded by such a word, the most important system parameter determined by the word size is the maximum size of the virtual address space
+
 * compile you can use -m32 to generate program for 32 or 64 bit machine, or -m64 just for 64-bit machine
+
 * ISO C99 introduce a class of data types where the data sizes are fixed regardless of compiler and machine settings
+
 * char type, most compilers treat these as signed data, the C standard does not guarantee this, it is best to use signed char
+
 * a multi-byte object is stored as a contiguous sequence of bytes, with the address of the object given by the smallest address of the bytes used
+
 * The least significant byte comes first, is referred to as little-endian
+
 * byte ordering becomes an issue, when binary data are communicated over a network between different machines
+
 * size_t is the preferred data type for expressing the sizes of the data structures
+
 * we can dereference a pointer with array notation, we can reference array elements with pointer notation.
+
 * the ASCII code for decimal digit x happens to be 0x3x, text data are more platform independent than binary data
+
 * the letters 'a' through 'z' have ascii codes 0x61 through 0x7A
+
 * the strlen does not count the terminating null character in C
+
 * Binary code is seldom portable across different combinations of machine and operating system
+
 * (a ^ b) ^ a = b , exclusive or
+
 * almost all compiler combinations use arithmetic right shifts for signed data
+
 * for unsigned data, on the other hand, right shifts must be logical
+
 * Java supports only signed numbers
+
 * . Consider the comparison -1 < 0U. Since the second operand is unsigned, the first one is implicitly cast to unsigned, and hence the expression is equivalent to the comparison 4294967295U < 0U
+
 * **#define INT_MIN (-INT_MAX - 1)**, the asymmetry of the two's complement representation and the conversion rules of C forces us to write in this unusual way
+
 * sign extension preserves the value of a two's complement number
+
 * when converting from short to unsigned, the program first changes the size and then the type
-*  the addition sum overflow, if and only if s < x, or s < y
-* 
+
+* the addition sum overflow, if and only if s < x, or s < y
+
+* for x and y in the range TMinw<=x, y <=TMaxw, then the computation of s has had positive overflow if and only if x > 0 and y > 0 but s <= 0, the computation has had negative overflow if and only if x < 0 and y < 0 but s >= 0
+
+* Expression (x+y) -x will evaluate to y regardless of whether or not the addition overflows and that (x+y)-y will always evaluate to x
+
+* with 64 bits, we can perform the multiplication without overflowing, we then test whether casting the product to 32 bits change the value
+
+* test whether x *y overflow:  return !x || p / x == y
+
+* FormA: (x<<n)+(x<<(n−1))+...+(x<<m)
+  Form B: (x<<(n + 1)) - (x<<m) 
+
+  using shifts to replace multiplication when multiplied by a constant, n >>m, is a running sequences of ones
+
+* dividing two's complement numbers by powers of 2, by adding a bias before the right shift, the result is rounded toward zero
+
+* unlike multiplication, we cannot express division by arbitrary constant K interms of division by powers of 2
+
+* the formula below compute the value x/2^k
+
+* ```
+   (x<0 ? x+(1<<k)-1 : x) >> k
+  ```
+
+* V = (-1) ^s  * M * 2 ^E, floating-point numbers are represented by three fields
+* with IEEE floating-point format, the values -0.0 and +0.0 are considered different in some ways and the same in others
+* a second function of denormalized numbers is to represent numbers that are very close to 0.0 they provide a property known as gradual underflow
