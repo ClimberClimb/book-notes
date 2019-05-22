@@ -119,9 +119,21 @@
 * the formula below compute the value x/2^k
 
 * ```
-   (x<0 ? x+(1<<k)-1 : x) >> k
+  (x<0 ? x+(1<<k)-1 : x) >> k
   ```
 
 * V = (-1) ^s  * M * 2 ^E, floating-point numbers are represented by three fields
+
 * with IEEE floating-point format, the values -0.0 and +0.0 are considered different in some ways and the same in others
+
 * a second function of denormalized numbers is to represent numbers that are very close to 0.0 they provide a property known as gradual underflow
+
+* the lack of associativity in floating-point addition is the most important group property that is lacking
+
+* (3.14+1e10)-1e10 evaluates to 0.0
+
+* the expression (int) 1e10 yields -21483648
+
+* intel-compatible microprocessors designate the bit pattern as an integer indefinite value
+
+* 
