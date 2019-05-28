@@ -136,4 +136,22 @@
 
 * intel-compatible microprocessors designate the bit pattern as an integer indefinite value
 
+
+
+## Chapter 3 Machine language
+
+* the GCC C compiler generates its output in the form of assembly code, a textual representation of the machine code giving the individual instructions in the program
+* assembly code is highly machine specific
+* Introduced AVX, an extension of the SSE to support data packed into 256-bit vectors
+* Gcc -Og -o p p1.c p2.c, the command-line option -Og instructs the compiler to apply a level of optimization that yields machine code that follows the overall structure of the original C code
+* the format and behavior of a machine-level program is defined by the ISA, defining the processor state, the format of the instruction set architecture or ISA
+* the program counter referred to as the PC, and called %rip in x86-64 
+* X86-64 instructions can range in length from 1 to 15 bytes the instruction encoding is designed so that commonly used instructions and those with fewer operands require a smaller number of bytes than do less common ones or ones with more operands
+* all the lines beginning with '.' directives to guide the assembler and linker
+* assembly code format: ATT, intel two formats
+* the stack pointer %rsp, used to indicate the end position in the run-time stack
+* any instruction that generates a 32-bit value for a register also sets th high-order portion of the register to 0
+* dereferencing a pointer involves copying that pointer into a register and then using this register in a memory reference
+* Local variables such as x are often kept in registers rather than stored in memory location
+* with x86-64, the program stack is stored in some region of memory
 * 
