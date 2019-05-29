@@ -154,4 +154,12 @@
 * dereferencing a pointer involves copying that pointer into a register and then using this register in a memory reference
 * Local variables such as x are often kept in registers rather than stored in memory location
 * with x86-64, the program stack is stored in some region of memory
+* the ability of the **leaq** instruction to perform addition and limited forms of multiplication proves useful when compiling simple arithmetic expressions such as this example
+* the different shift instructions can specify the shift amount either as an immediate value or with the single-byte register
+* Flags in ALU: Carry flag, Zero flag, Sign flag, Overflow flag
+* Conditional jumps can only be direct
+* by using a PC-relative encoding of the jump targets, the instructions can be compactly encoded 
+* Before shifting by k = 4, we must add a bias of 2k - 1 =15 when the dividend is negative
+* we can test for overflow by computing x/n and seeing whether it equals x/n = (n-1)!
+* switch: allow an efficient implementation using a data structure called a jump table
 * 
