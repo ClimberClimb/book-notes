@@ -498,6 +498,8 @@
   linux> gcc -rdynamic -o prog2r dll.c -ldl
   ```
 
+* the program contains a .interp section, which contains the path name of the dynamic linker
+
 * At load time, the dynamic linker relocates each GOT entry so that it contains absolute address of the object
 
 * Lazy binding is implemented with a compact yet somewhat complex interac-
@@ -554,5 +556,17 @@
 
 ## Chapter 8
 
-
-
+* Applications request services from the operating system by using a form of ECF known as a trap or system call
+* an exception is an abrupt change in the control flow in response to some change in the processor's state
+* when the processor detects that the event has occured, it makes an indirect procedure call, through a jump table called an exception table, to an operating system subroutine that is specifically designed to process this particular kind of event
+* Exceptions can be divided into four classes: *interrupts*, *traps*, *faults*, and *aborts*.
+* The remaining classes of exceptions (traps, faults, and aborts) occur *syn-
+  chronously* as a result of executing the current instruction
+* Executing the syscall instruction causes a trap to an exception handler that decodes the argument and calls the appropriate kernel routine
+* Regular functions run in user mode, which retricts the types of instructions they can execute
+* A classic example of a fault is the page fault exception, which occurs when
+  an instruction references a virtual address whose corresponding page is not res-
+  ident in memory and must therefore be retrieved from disk
+* System calls are provided on x86-64 systems via a trapping instruction called syscall
+* All arguments to linux system calls are passed through general-purpose registers rather than the stack
+* 
